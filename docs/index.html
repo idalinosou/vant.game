@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vant.game — adivinhe o número</title>
+  <meta name="description" content="Jogo de adivinhação da suíte vant, com níveis de dificuldade, pontuação e ranking." />
+  <meta property="og:title" content="vant.game — adivinhe o número" />
+  <meta property="og:description" content="Jogo de adivinhação com dificuldades, pontuação e ranking. Versão web do projeto em Java." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="marca/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="marca/favicon-64.png" sizes="64x64" type="image/png" />
+  <link rel="apple-touch-icon" href="marca/apple-touch-icon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topo">
+    <a class="marca" href="https://github.com/idalinosou/portfolio" aria-label="Voltar ao portfólio vant.dev">
+      <img src="marca/vant-mark.png" alt="" width="807" height="592" />
+      <span>vant<span class="ponto">.</span>game</span>
+    </a>
+    <span class="versao">v2.0</span>
+  </header>
+
+  <main class="grade">
+    <section class="painel" id="telaInicio" aria-labelledby="tituloInicio">
+      <p class="selo"><span class="selo-ponto"></span> Mesmas regras do jogo em Java</p>
+      <h1 id="tituloInicio">Adivinhe o número<span class="ponto">.</span></h1>
+      <p class="texto">
+        Escolha a dificuldade, diga seu nome e tente acertar o número secreto
+        antes que as tentativas acabem.
+      </p>
+
+      <label class="campo" for="nome">Seu nome</label>
+      <input id="nome" type="text" maxlength="20" autocomplete="nickname" placeholder="Digite seu nome" />
+
+      <fieldset class="dificuldades">
+        <legend>Escolha a dificuldade</legend>
+        <label class="dificuldade">
+          <input type="radio" name="dificuldade" value="FACIL" />
+          <span class="dificuldade-conteudo">
+            <strong>Fácil</strong>
+            <small>1 a 50 · 12 tentativas</small>
+          </span>
+        </label>
+        <label class="dificuldade">
+          <input type="radio" name="dificuldade" value="MEDIO" checked />
+          <span class="dificuldade-conteudo">
+            <strong>Médio</strong>
+            <small>1 a 100 · 8 tentativas</small>
+          </span>
+        </label>
+        <label class="dificuldade">
+          <input type="radio" name="dificuldade" value="DIFICIL" />
+          <span class="dificuldade-conteudo">
+            <strong>Difícil</strong>
+            <small>1 a 500 · 9 tentativas</small>
+          </span>
+        </label>
+      </fieldset>
+
+      <button class="botao" id="comecar" type="button">Começar</button>
+      <p class="aviso" id="avisoInicio" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="painel escondido" id="telaJogo" aria-labelledby="tituloJogo">
+      <h1 class="sr-only" id="tituloJogo">Partida em andamento</h1>
+
+      <div class="jogo-topo">
+        <div>
+          <span class="rotulo">Dificuldade</span>
+          <strong id="dificuldadeAtual">—</strong>
+        </div>
+        <div>
+          <span class="rotulo">Tentativas</span>
+          <strong id="tentativasAtual">—</strong>
+        </div>
+        <div>
+          <span class="rotulo">Tempo</span>
+          <strong id="tempoAtual">0s</strong>
+        </div>
+      </div>
+
+      <p class="intervalo" id="intervalo"></p>
+
+      <form class="palpite" id="formPalpite" novalidate>
+        <label class="sr-only" for="palpite">Seu palpite</label>
+        <input id="palpite" type="number" inputmode="numeric" placeholder="Digite o número" />
+        <button class="botao" type="submit">Enviar</button>
+      </form>
+
+      <p class="dica" id="dica" role="status" aria-live="polite"></p>
+
+      <div class="barra" aria-hidden="true">
+        <div class="barra-preenchida" id="barraProgresso"></div>
+      </div>
+
+      <div class="acoes escondido" id="acoesFim">
+        <button class="botao" id="jogarNovamente" type="button">Jogar novamente</button>
+        <button class="botao vazado" id="trocarDificuldade" type="button">Trocar dificuldade</button>
+      </div>
+    </section>
+
+    <section class="painel ranking" aria-labelledby="tituloRanking">
+      <div class="ranking-topo">
+        <h2 id="tituloRanking">Ranking</h2>
+        <button class="link" id="limparRanking" type="button">Limpar</button>
+      </div>
+      <ol class="lista-ranking" id="listaRanking"></ol>
+      <p class="rank-vazio" id="rankingVazio">Nenhuma vitória registrada ainda.</p>
+      <p class="rank-total" id="rankingTotal"></p>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p><span class="marca-texto">vant<span class="ponto">.</span>game</span> © <span id="ano"></span> Victor Idalino</p>
+    <p>Versão web do projeto em Java — HTML, CSS e JavaScript.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
